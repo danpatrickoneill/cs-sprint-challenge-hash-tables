@@ -2,6 +2,8 @@ def intersection(arrays):
     result = []
     numbers = {}
     array_count = len(arrays)
+    # Could use the below sort and then just check for elements from dict; would still be slower
+    # arrays.sort(key=lambda array: len(array))
     for num in arrays[0]:
         numbers[num] = 1
     for arr in arrays[1:]:
