@@ -3,23 +3,42 @@
 
 
 def finder(files, queries):
-    """
-    YOUR CODE HERE
-    """
-    # Your code here
-
+    result = []
+    paths_by_file = {}
+    for path in files:
+        f = path.split('/')[-1]
+        # Need to account for multiple paths to same file; wrap first path in a list
+        if f not in paths_by_file:
+            paths_by_file[f] = [path]
+        else:
+            paths_by_file[f].append(path)
+    for q in queries:
+        if q in paths_by_file:
+            result.extend(paths_by_file[q])
     return result
 
 
 if __name__ == "__main__":
-    files = [
-        '/bin/foo',
-        '/bin/bar',
-        '/usr/bin/baz'
+    files = []
+
+    for i in range(500000):
+        files.append(f"/dir{i}/file{i}")
+
+    for i in range(500000):
+        files.append(f"/dir{i}/dirb{i}/file{i}")
+
+    queries = []
+
+    for i in range(1000000):
+        queries.append(f"nofile{i}")
+
+    queries += [
+        "file3490",
+        "file256",
+        "file999999",
+        "file8192"
     ]
-    queries = [
-        "foo",
-        "qux",
-        "baz"
-    ]
-    print(finder(files, queries))
+
+    result = finder(files, queries)
+    print(result)
+    result.sort()
