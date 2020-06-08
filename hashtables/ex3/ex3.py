@@ -1,9 +1,18 @@
 def intersection(arrays):
-    """
-    YOUR CODE HERE
-    """
-    # Your code here
-
+    result = []
+    numbers = {}
+    array_count = len(arrays)
+    # Could use the below sort and then just check for elements from dict; would still be slower
+    # arrays.sort(key=lambda array: len(array))
+    for num in arrays[0]:
+        numbers[num] = 1
+    for arr in arrays[1:]:
+        for num in arr:
+            if num in numbers:
+                numbers[num] += 1
+    for number in numbers:
+        if numbers[number] == array_count:
+            result.append(number)
     return result
 
 

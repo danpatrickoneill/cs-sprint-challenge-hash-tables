@@ -1,8 +1,14 @@
+import math
+
 def has_negatives(a):
-    """
-    YOUR CODE HERE
-    """
-    # Your code here
+    result = []
+    opposites = {}
+    for num in a:
+        # Zero has no negative; dodge the edge case
+        if num != 0:
+            opposites[-num] = num
+            if num in opposites:
+                result.append(abs(num))
 
     return result
 
